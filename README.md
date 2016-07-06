@@ -12,5 +12,5 @@ create a folder named "smoothing", put downloaded zips in and unzip them
 
 for example, there should be a file's path like: /smoothing/ori/bunny.obj
 
-
+# Control
 除了UI上說明的操作之外, backspace左邊兩個按鍵可以調整攝影機遠近
