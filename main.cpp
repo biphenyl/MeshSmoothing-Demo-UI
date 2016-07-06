@@ -275,7 +275,6 @@ static void render()
 	glUseProgram(program1);
 	glBindVertexArray(objects[0].vao);
 	glBindTexture(GL_TEXTURE_2D, objects[0].texture);
-	//you should send some data to shader here
 	glDrawElements(GL_TRIANGLES, indicesCount[0], GL_UNSIGNED_INT, nullptr);
 
 	//render ui objects, background first
@@ -704,10 +703,10 @@ int main(int argc, char *argv[])
 	filenames[3] = "/tau/";
 
 	// load shader program
-	shaders[0] = setup_shader(readfile("vs.txt").c_str(), readfile("fs.txt").c_str());
-	gui_shader = setup_shader(readfile("guivs.txt").c_str(), readfile("guifs.txt").c_str());
-	shaders[1] = setup_shader(readfile("nvs.txt").c_str(), readfile("nfs.txt").c_str());
-	shaders[2] = setup_shader(readfile("fvs.txt").c_str(), readfile("ffs.txt").c_str());
+	shaders[0] = setup_shader(readfile("shaders/vs.txt").c_str(), readfile("shaders/fs.txt").c_str());
+	gui_shader = setup_shader(readfile("shaders/guivs.txt").c_str(), readfile("shaders/guifs.txt").c_str());
+	shaders[1] = setup_shader(readfile("shaders/nvs.txt").c_str(), readfile("shaders/nfs.txt").c_str());
+	shaders[2] = setup_shader(readfile("shaders/fvs.txt").c_str(), readfile("shaders/ffs.txt").c_str());
 	printf("we have:%d, %d, %d\n", shaders[0], shaders[1], shaders[2]);
 	program1 = shaders[0];
 
