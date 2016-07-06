@@ -275,7 +275,6 @@ static void render()
 	glUseProgram(program1);
 	glBindVertexArray(objects[0].vao);
 	glBindTexture(GL_TEXTURE_2D, objects[0].texture);
-	//you should send some data to shader here
 	glDrawElements(GL_TRIANGLES, indicesCount[0], GL_UNSIGNED_INT, nullptr);
 
 	//render ui objects, background first
