@@ -9,4 +9,5 @@ before use, make sure you download models from
   https://drive.google.com/file/d/0B1IQd6JMt7EwaU1PUGNFSzMtWUE
 
 put them in smoothing floder, and unzip them 
+
 for example, ther should be a file in path like: /smoothing/ori/bunny.obj
