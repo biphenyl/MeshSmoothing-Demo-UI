@@ -1,0 +1,36 @@
+#version 330
+
+layout(location=0) out vec4 color;
+
+in vec3 fPosition;
+in vec3 fNormal;
+in vec3 eye_dir;
+in vec3 light_dir;
+in vec3 light_pos;
+
+uniform mat4 model;
+
+void main()
+{
+	vec3 fColor = vec3(1.0, 1.0, 1.0);
+	float light_power = 50.0;
+	
+	float dis = length(light_pos - fPosition);
+	
+	vec3 h = normalize(eye_dir + light_dir);
+
+	float cos_diffuse = clamp(dot(normalize(light_dir),normalize(fNormal)), 0, 1);
+	float cos_specular = clamp(dot(h, normalize(fNormal)), 0, 1);
+	
+	vec3 light_color = vec3(1,1,1);
+	
+	vec3 d_color = fColor;
+	vec3 a_color = fColor * vec3(0.2,0.2,0.2); 
+	vec3 s_color = vec3(0.1, 0.1, 0.1);
+	
+	vec3 frag_color = d_color * light_color * (cos_diffuse/(dis*dis)) * light_power+ 
+						a_color +
+						s_color * light_color * light_power * pow(cos_specular,5) / (dis*dis);
+	color = vec4(frag_color, 1.0);
+
+}

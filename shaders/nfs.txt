@@ -1,0 +1,15 @@
+#version 330
+
+layout(location=0) out vec4 color;
+
+in vec3 fNormal;
+
+uniform sampler2D uSampler;
+uniform mat4 model;
+
+void main()
+{
+	vec3 fColor = fNormal;
+	color = vec4(fColor, 1.0);
+
+}

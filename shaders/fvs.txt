@@ -1,0 +1,44 @@
+#version 330
+layout(location=0) in vec3 position;
+layout(location=1) in vec2 texcoord;
+layout(location=2) in vec3 normal;
+
+uniform mat4 model;
+uniform mat4 v;
+uniform mat4 p;
+
+flat out vec3 fPosition;
+flat out vec3 fNormal;
+flat out vec3 fragment_color;
+
+void main()
+{
+	float light_power = 50.0;
+	
+	vec3 view_position = (v * model * vec4(position, 1.0)).xyz;
+	gl_Position= p * vec4(view_position,1.0);
+	gl_Position.x -= 0.25;
+	
+	vec3 light_pos = vec3(5,5,5);
+	vec3 view_normal = (v * model * vec4(normal, 0.0)).xyz;
+	
+	float dis = length(light_pos - view_position);
+	
+	vec3 eye = vec3(0,0,0) - view_position;
+	vec3 yee = light_pos - view_position;
+	
+	float cos_diffuse = clamp(dot(normalize(yee),normalize(view_normal)), 0, 1);
+	float cos_specular = clamp(dot(normalize(eye), reflect(normalize(-yee),normalize(view_normal))), 0, 1);
+	
+	vec3 base_color = vec3(1,1,1);
+	vec3 light_color = vec3(1,1,1);
+					
+	vec3 d_color = base_color;
+	vec3 a_color = base_color * vec3(0.2,0.2,0.2);
+	vec3 s_color = vec3(0.1, 0.1, 0.1);
+	
+	fragment_color = d_color * light_color * (cos_diffuse/(dis*dis)) * light_power+ 
+						a_color +
+						s_color * light_color * light_power * pow(cos_specular,5) / (dis*dis);
+						
+}
